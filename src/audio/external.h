@@ -5,6 +5,8 @@
 
 #include "types.h"
 
+#define MAX_AUDIO_OVERRIDE 128
+
 // Sequence arguments, passed to seq_player_play_sequence. seqId may be bit-OR'ed with
 // SEQ_VARIATION; this will load the same sequence, but set a variation
 // bit which may be read by the sequence script.

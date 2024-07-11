@@ -39,12 +39,6 @@
 #include "game/main.h"
 #include "game/rumble_init.h"
 
-#ifdef HAVE_BASS
-#include "include/bass/bass.h"
-#include "include/bass/bass_fx.h"
-#include "src/bass_audio/bass_audio_helpers.h"
-#endif
-
 #include "pc/lua/utils/smlua_audio_utils.h"
 
 #include "pc/network/version.h"
@@ -247,9 +241,7 @@ void produce_one_frame(void) {
 }
 
 void audio_shutdown(void) {
-#ifdef HAVE_BASS
     audio_custom_shutdown();
-#endif
     if (audio_api) {
         if (audio_api->shutdown) audio_api->shutdown();
         audio_api = NULL;
@@ -259,13 +251,12 @@ void audio_shutdown(void) {
 void game_deinit(void) {
     if (gGameInited) configfile_save(configfile_name());
     controller_shutdown();
-#ifdef HAVE_BASS
     audio_custom_shutdown();
-#endif
     audio_shutdown();
     gfx_shutdown();
     network_shutdown(true, true, false, false);
     smlua_shutdown();
+    smlua_audio_custom_deinit();
     mods_shutdown();
     gGameInited = false;
 }
@@ -342,9 +333,7 @@ void* main_game_init(UNUSED void* arg) {
 #endif
     }
 
-#ifdef HAVE_BASS
-    bassh_init();
-#endif
+    smlua_audio_custom_init();
     network_player_init();
 
 #ifdef EXTERNAL_DATA
@@ -451,8 +440,5 @@ int main(int argc, char *argv[]) {
         CTX_END(CTX_FRAME);
     }
 
-#ifdef HAVE_BASS
-    bassh_deinit();
-#endif
     return 0;
 }

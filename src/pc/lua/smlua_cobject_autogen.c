@@ -1006,13 +1006,6 @@ static struct LuaObjectField sLinearTransitionPointFields[LUA_LINEAR_TRANSITION_
     { "yaw",   LVT_S16,     offsetof(struct LinearTransitionPoint, yaw),   false, LOT_NONE  },
 };
 
-#define LUA_MARIO_ANIM_DMA_RELATED_THING_FIELD_COUNT 3
-static struct LuaObjectField sMarioAnimDmaRelatedThingFields[LUA_MARIO_ANIM_DMA_RELATED_THING_FIELD_COUNT] = {
-    { "anim",    LVT_COBJECT, offsetof(struct MarioAnimDmaRelatedThing, anim),    true,  LOT_OFFSETSIZEPAIR },
-    { "count",   LVT_U32,     offsetof(struct MarioAnimDmaRelatedThing, count),   false, LOT_NONE           },
-    { "srcAddr", LVT_U8_P,    offsetof(struct MarioAnimDmaRelatedThing, srcAddr), true,  LOT_POINTER        },
-};
-
 #define LUA_MARIO_ANIMATION_FIELD_COUNT 2
 static struct LuaObjectField sMarioAnimationFields[LUA_MARIO_ANIMATION_FIELD_COUNT] = {
 //  { "animDmaTable",    LVT_COBJECT_P, offsetof(struct MarioAnimation, animDmaTable),    true,  LOT_???       }, <--- UNIMPLEMENTED
@@ -1144,6 +1137,23 @@ static struct LuaObjectField sModFields[LUA_MOD_FIELD_COUNT] = {
     { "renderBehindHud",     LVT_BOOL,     offsetof(struct Mod, renderBehindHud),     true, LOT_NONE },
     { "selectable",          LVT_BOOL,     offsetof(struct Mod, selectable),          true, LOT_NONE },
 //  { "size",                LVT_???,      offsetof(struct Mod, size),                true, LOT_???  }, <--- UNIMPLEMENTED
+};
+
+#define LUA_MOD_AUDIO_FIELD_COUNT 4
+static struct LuaObjectField sModAudioFields[LUA_MOD_AUDIO_FIELD_COUNT] = {
+    { "file",             LVT_COBJECT_P, offsetof(struct ModAudio, file),             false, LOT_MODFILE              },
+    { "isStream",         LVT_BOOL,      offsetof(struct ModAudio, isStream),         false, LOT_NONE                 },
+    { "loaded",           LVT_BOOL,      offsetof(struct ModAudio, loaded),           false, LOT_NONE                 },
+    { "sampleCopiesTail", LVT_COBJECT_P, offsetof(struct ModAudio, sampleCopiesTail), false, LOT_MODAUDIOSAMPLECOPIES },
+//  { "sound",            LVT_???,       offsetof(struct ModAudio, sound),            false, LOT_???                  }, <--- UNIMPLEMENTED
+};
+
+#define LUA_MOD_AUDIO_SAMPLE_COPIES_FIELD_COUNT 3
+static struct LuaObjectField sModAudioSampleCopiesFields[LUA_MOD_AUDIO_SAMPLE_COPIES_FIELD_COUNT] = {
+    { "next",   LVT_COBJECT_P, offsetof(struct ModAudioSampleCopies, next),   false, LOT_MODAUDIOSAMPLECOPIES },
+    { "parent", LVT_COBJECT_P, offsetof(struct ModAudioSampleCopies, parent), false, LOT_MODAUDIO             },
+    { "prev",   LVT_COBJECT_P, offsetof(struct ModAudioSampleCopies, prev),   false, LOT_MODAUDIOSAMPLECOPIES },
+//  { "sound",  LVT_???,       offsetof(struct ModAudioSampleCopies, sound),  false, LOT_???                  }, <--- UNIMPLEMENTED
 };
 
 #define LUA_MOD_FILE_FIELD_COUNT 3
@@ -2131,14 +2141,6 @@ static struct LuaObjectField sRayIntersectionInfoFields[LUA_RAY_INTERSECTION_INF
     { "surface", LVT_COBJECT_P, offsetof(struct RayIntersectionInfo, surface), false, LOT_SURFACE },
 };
 
-#define LUA_SPTASK_FIELD_COUNT 1
-static struct LuaObjectField sSPTaskFields[LUA_SPTASK_FIELD_COUNT] = {
-//  { "msg",      LVT_???, offsetof(struct SPTask, msg),      false, LOT_???  }, <--- UNIMPLEMENTED
-//  { "msgqueue", LVT_???, offsetof(struct SPTask, msgqueue), false, LOT_???  }, <--- UNIMPLEMENTED
-    { "state",    LVT_S32, offsetof(struct SPTask, state),    false, LOT_NONE },
-//  { "task",     LVT_???, offsetof(struct SPTask, task),     false, LOT_???  }, <--- UNIMPLEMENTED
-};
-
 #define LUA_SERVER_SETTINGS_FIELD_COUNT 10
 static struct LuaObjectField sServerSettingsFields[LUA_SERVER_SETTINGS_FIELD_COUNT] = {
     { "bubbleDeath",                 LVT_U8,  offsetof(struct ServerSettings, bubbleDeath),                 false, LOT_NONE },
@@ -2277,21 +2279,6 @@ static struct LuaObjectField sTransitionInfoFields[LUA_TRANSITION_INFO_FIELD_COU
     { "posYaw",     LVT_S16,     offsetof(struct TransitionInfo, posYaw),     false, LOT_NONE  },
 };
 
-#define LUA_UNUSED_AREA28_FIELD_COUNT 5
-static struct LuaObjectField sUnusedArea28Fields[LUA_UNUSED_AREA28_FIELD_COUNT] = {
-    { "unk00", LVT_S16, offsetof(struct UnusedArea28, unk00), false, LOT_NONE },
-    { "unk02", LVT_S16, offsetof(struct UnusedArea28, unk02), false, LOT_NONE },
-    { "unk04", LVT_S16, offsetof(struct UnusedArea28, unk04), false, LOT_NONE },
-    { "unk06", LVT_S16, offsetof(struct UnusedArea28, unk06), false, LOT_NONE },
-    { "unk08", LVT_S16, offsetof(struct UnusedArea28, unk08), false, LOT_NONE },
-};
-
-#define LUA_VBLANK_HANDLER_FIELD_COUNT 0
-static struct LuaObjectField sVblankHandlerFields[LUA_VBLANK_HANDLER_FIELD_COUNT] = {
-//  { "msg",   LVT_???, offsetof(struct VblankHandler, msg),   false, LOT_??? }, <--- UNIMPLEMENTED
-//  { "queue", LVT_???, offsetof(struct VblankHandler, queue), false, LOT_??? }, <--- UNIMPLEMENTED
-};
-
 #define LUA_WALL_COLLISION_DATA_FIELD_COUNT 9
 static struct LuaObjectField sWallCollisionDataFields[LUA_WALL_COLLISION_DATA_FIELD_COUNT] = {
     { "normalAddition", LVT_COBJECT, offsetof(struct WallCollisionData, normalAddition), true,  LOT_VEC3F },
@@ -2402,11 +2389,12 @@ struct LuaObjectTable sLuaObjectAutogenTable[LOT_AUTOGEN_MAX - LOT_AUTOGEN_MIN] 
     { LOT_LAKITUSTATE,               sLakituStateFields,               LUA_LAKITU_STATE_FIELD_COUNT                 },
     { LOT_LEVELVALUES,               sLevelValuesFields,               LUA_LEVEL_VALUES_FIELD_COUNT                 },
     { LOT_LINEARTRANSITIONPOINT,     sLinearTransitionPointFields,     LUA_LINEAR_TRANSITION_POINT_FIELD_COUNT      },
-    { LOT_MARIOANIMDMARELATEDTHING,  sMarioAnimDmaRelatedThingFields,  LUA_MARIO_ANIM_DMA_RELATED_THING_FIELD_COUNT },
     { LOT_MARIOANIMATION,            sMarioAnimationFields,            LUA_MARIO_ANIMATION_FIELD_COUNT              },
     { LOT_MARIOBODYSTATE,            sMarioBodyStateFields,            LUA_MARIO_BODY_STATE_FIELD_COUNT             },
     { LOT_MARIOSTATE,                sMarioStateFields,                LUA_MARIO_STATE_FIELD_COUNT                  },
     { LOT_MOD,                       sModFields,                       LUA_MOD_FIELD_COUNT                          },
+    { LOT_MODAUDIO,                  sModAudioFields,                  LUA_MOD_AUDIO_FIELD_COUNT                    },
+    { LOT_MODAUDIOSAMPLECOPIES,      sModAudioSampleCopiesFields,      LUA_MOD_AUDIO_SAMPLE_COPIES_FIELD_COUNT      },
     { LOT_MODFILE,                   sModFileFields,                   LUA_MOD_FILE_FIELD_COUNT                     },
     { LOT_MODETRANSITIONINFO,        sModeTransitionInfoFields,        LUA_MODE_TRANSITION_INFO_FIELD_COUNT         },
     { LOT_NETWORKPLAYER,             sNetworkPlayerFields,             LUA_NETWORK_PLAYER_FIELD_COUNT               },
@@ -2423,7 +2411,6 @@ struct LuaObjectTable sLuaObjectAutogenTable[LOT_AUTOGEN_MAX - LOT_AUTOGEN_MIN] 
     { LOT_PLAYERGEOMETRY,            sPlayerGeometryFields,            LUA_PLAYER_GEOMETRY_FIELD_COUNT              },
     { LOT_PLAYERPALETTE,             sPlayerPaletteFields,             LUA_PLAYER_PALETTE_FIELD_COUNT               },
     { LOT_RAYINTERSECTIONINFO,       sRayIntersectionInfoFields,       LUA_RAY_INTERSECTION_INFO_FIELD_COUNT        },
-    { LOT_SPTASK,                    sSPTaskFields,                    LUA_SPTASK_FIELD_COUNT                       },
     { LOT_SERVERSETTINGS,            sServerSettingsFields,            LUA_SERVER_SETTINGS_FIELD_COUNT              },
     { LOT_SOUNDSTATE,                sSoundStateFields,                LUA_SOUND_STATE_FIELD_COUNT                  },
     { LOT_SPAWNINFO,                 sSpawnInfoFields,                 LUA_SPAWN_INFO_FIELD_COUNT                   },
@@ -2434,8 +2421,6 @@ struct LuaObjectTable sLuaObjectAutogenTable[LOT_AUTOGEN_MAX - LOT_AUTOGEN_MIN] 
     { LOT_SURFACE,                   sSurfaceFields,                   LUA_SURFACE_FIELD_COUNT                      },
     { LOT_TEXTUREINFO,               sTextureInfoFields,               LUA_TEXTURE_INFO_FIELD_COUNT                 },
     { LOT_TRANSITIONINFO,            sTransitionInfoFields,            LUA_TRANSITION_INFO_FIELD_COUNT              },
-    { LOT_UNUSEDAREA28,              sUnusedArea28Fields,              LUA_UNUSED_AREA28_FIELD_COUNT                },
-    { LOT_VBLANKHANDLER,             sVblankHandlerFields,             LUA_VBLANK_HANDLER_FIELD_COUNT               },
     { LOT_WALLCOLLISIONDATA,         sWallCollisionDataFields,         LUA_WALL_COLLISION_DATA_FIELD_COUNT          },
     { LOT_WARPNODE,                  sWarpNodeFields,                  LUA_WARP_NODE_FIELD_COUNT                    },
     { LOT_WARPTRANSITION,            sWarpTransitionFields,            LUA_WARP_TRANSITION_FIELD_COUNT              },

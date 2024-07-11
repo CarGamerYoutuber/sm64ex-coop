@@ -647,10 +647,6 @@ ifeq ($(TARGET_ANDROID),1)
   SRC_DIRS += platform/android
 endif
 
-ifeq ($(TARGET_FOSS),0)
-  SRC_DIRS += src/bass_audio
-endif
-
 ifeq ($(DISCORD_SDK),1)
   SRC_DIRS += src/pc/discord
 endif
@@ -742,31 +738,6 @@ ifeq ($(DISCORD_SDK), 1)
   else
     DISCORD_SDK_LIBS := lib/discordsdk/libdiscord_game_sdk.so
   endif
-endif
-
-BASS_LIBS :=
-ifeq ($(WINDOWS_BUILD),1)
-  ifeq ($(TARGET_BITS), 32)
-    BASS_LIBS := lib/bass/x86/bass.dll lib/bass/x86/bass_fx.dll
-  else
-    BASS_LIBS := lib/bass/bass.dll lib/bass/bass_fx.dll
-  endif
-else ifeq ($(OSX_BUILD),1)
-  # needs testing
-  # HACKY! Instead of figuring out all of the dynamic library linking madness...
-  # I copied the library and gave it two names.
-  # This really shouldn't be required, but I got tired of trying to do it the "right way"
-  BASS_LIBS := lib/bass/bass.dylib lib/bass/libbass.dylib lib/bass/bass_fx.dylib lib/bass/libbass_fx.dylib
-else ifeq ($(TARGET_RPI),1)
-  ifneq (,$(findstring aarch64,$(machine)))
-    BASS_LIBS := lib/bass/arm/aarch64/libbass.so lib/bass/arm/aarch64/libbass_fx.so
-  else
-    BASS_LIBS := lib/bass/arm/libbass.so lib/bass/arm/libbass_fx.so
-  endif
-else ifeq ($(TARGET_FOSS),1)
-  BASS_LIBS :=
-else
-  BASS_LIBS := lib/bass/libbass.so lib/bass/libbass_fx.so
 endif
 
 LANG_DIR := lang
@@ -1172,23 +1143,15 @@ ifeq ($(COOPNET),1)
   endif
 endif
 
-# Network/Discord/Bass (ugh, needs cleanup)
+# Network/Discord (ugh, needs cleanup)
 ifeq ($(WINDOWS_BUILD),1)
   LDFLAGS += -L"ws2_32" -lwsock32
   ifeq ($(DISCORD_SDK),1)
-    LDFLAGS += -Wl,-Bdynamic -L./lib/discordsdk/ -L./lib/bass/ -ldiscord_game_sdk -lbass -lbass_fx -Wl,-Bstatic
-  else
-    LDFLAGS += -Wl,-Bdynamic -L./lib/bass/ -lbass -lbass_fx -Wl,-Bstatic
+    LDFLAGS += -Wl,-Bdynamic -L./lib/discordsdk/ -ldiscord_game_sdk -Wl,-Bstatic
   endif
 else
   ifeq ($(DISCORD_SDK),1)
-    LDFLAGS += -ldiscord_game_sdk -lbass -lbass_fx -Wl,-rpath . -Wl,-rpath lib/discordsdk -Wl,-rpath lib/bass
-  else
-    ifeq ($(TARGET_RPI),1)
-      LDFLAGS += -lbass -lbass_fx -Wl,-rpath . -Wl,-rpath lib/bass/arm
-    else ifeq ($(TARGET_FOSS),0)
-      LDFLAGS += -lbass -lbass_fx -Wl,-rpath . -Wl,-rpath lib/bass
-    endif
+    LDFLAGS += -ldiscord_game_sdk -Wl,-rpath . -Wl,-rpath lib/discordsdk
   endif
 endif
 
@@ -1247,11 +1210,6 @@ endif
   CC_CHECK_CFLAGS += -DNODRAWINGDISTANCE
   CFLAGS += -DNODRAWINGDISTANCE
 #endif
-
-ifeq ($(TARGET_FOSS),0)
-  CC_CHECK_CFLAGS += -DHAVE_BASS
-  CFLAGS += -DHAVE_BASS
-endif
 
 ifeq ($(WINDOW_API),SDL2)
   # Check for SDL2 touch controls
@@ -1455,9 +1413,6 @@ $(BUILD_DIR)/$(RPC_LIBS):
 
 $(BUILD_DIR)/$(DISCORD_SDK_LIBS):
 	@$(CP) -f $(DISCORD_SDK_LIBS) $(BUILD_DIR)
-
-$(BUILD_DIR)/$(BASS_LIBS):
-	@$(CP) -f $(BASS_LIBS) $(BUILD_DIR)
 
 $(BUILD_DIR)/$(COOPNET_LIBS):
 	@$(CP) -f $(COOPNET_LIBS) $(BUILD_DIR)
@@ -1915,6 +1870,7 @@ $(APK_SIGNED): $(APK_ALIGNED)
 endif
 
 # Ugly but I don't have a better idea right now
+# I have a better idea now. That will come later.
 ifeq ($(TARGET_BSD), 1)
   DUMMY != mkdir -p ~/.local/share/sm64ex-coop/mods && \
            mkdir -p ~/.local/share/sm64ex-coop/lang && \
@@ -1922,7 +1878,7 @@ ifeq ($(TARGET_BSD), 1)
            cp -r lang/ ~/.local/share/sm64ex-coop/lang
 endif
 
-  $(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/$(RPC_LIBS) $(BUILD_DIR)/$(DISCORD_SDK_LIBS) $(BUILD_DIR)/$(BASS_LIBS) $(BUILD_DIR)/$(COOPNET_LIBS) $(BUILD_DIR)/$(LANG_DIR) $(BUILD_DIR)/$(MOD_DIR)
+  $(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/$(RPC_LIBS) $(BUILD_DIR)/$(DISCORD_SDK_LIBS) $(BUILD_DIR)/$(COOPNET_LIBS) $(BUILD_DIR)/$(LANG_DIR) $(BUILD_DIR)/$(MOD_DIR)
 	@$(PRINT) "$(GREEN)Linking executable: $(BLUE)$@ $(NO_COL)\n"
 	$(V)$(LD) $(PROF_FLAGS) -L $(BUILD_DIR) -o $@ $(O_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 endif

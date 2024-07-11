@@ -108,12 +108,13 @@ override_disallowed_functions = {
     "src/pc/lua/utils/smlua_obj_utils.h":  [ "spawn_object_remember_field" ],
     "src/game/camera.h":                   [ "update_camera", "init_camera", "stub_camera", "^reset_camera", "move_point_along_spline" ],
     "src/game/behavior_actions.h":         [ "bhv_dust_smoke_loop", "bhv_init_room" ],
-    "src/pc/lua/utils/smlua_audio_utils.h": [ "smlua_audio_utils_override", "audio_custom_shutdown"],
+    "src/pc/lua/utils/smlua_audio_utils.h":     [ "smlua_audio_utils_override", "audio_custom_shutdown", "smlua_audio_custom_init", "smlua_audio_custom_deinit", "audio_sample_destroy_pending_copies" ],
     "src/pc/djui/djui_hud_utils.h":         [ "djui_hud_render_texture", "djui_hud_render_texture_raw", "djui_hud_render_texture_tile", "djui_hud_render_texture_tile_raw" ],
     "src/pc/lua/utils/smlua_level_utils.h": [ "smlua_level_util_reset" ],
     "src/pc/lua/utils/smlua_text_utils.h":  [ "smlua_text_utils_reset_all" ],
     "src/pc/lua/utils/smlua_anim_utils.h":  [ "smlua_anim_util_reset", "smlua_anim_util_register_animation" ],
-    "src/pc/network/lag_compensation.h":    [ "lag_compensation_clear", "lag_compensation_store" ]
+    "src/pc/network/lag_compensation.h":    [ "lag_compensation_clear", "lag_compensation_store" ],
+    "src/pc/mods/mod_storage.h" : [ "key_cache_init" ],
 }
 
 override_hide_functions = {
@@ -633,11 +634,6 @@ def build_function(function, do_extern):
         LOG_LUA_LINE("Improper param count for '%%s': Expected %%u, Received %%u", "%s", %d, top);
         return 0;
     }\n\n""" % (len(function['params']), function['identifier'], len(function['params']))
-
-    # stub Bass and discord, but not walking animations
-    if 'audio_' in fid and 'smlua' not in fid and 'anim' not in fid or 'discord' in fid:
-        function['implemented'] = True
-        return s + '    return 1;\n}\n\n'
 
     i = 1
     for param in function['params']:

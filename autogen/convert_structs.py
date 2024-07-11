@@ -101,7 +101,6 @@ override_field_immutable = {
     "Area": [ "localAreaTimer", "nextSyncID", "unk04", "objectSpawnInfos", "paintingWarpNodes", "warpNodes" ],
     "Mod": [ "*" ],
     "ModFile": [ "*" ],
-    "BassAudio": [ "*" ],
     "Painting": [ "id", "imageCount", "textureType", "textureWidth", "textureHeight" ],
     "SpawnInfo": [ "syncID", "next", "unk18" ],
     "CustomLevelInfo": [ "next" ],
@@ -121,10 +120,6 @@ override_field_version_excludes = {
 override_allowed_structs = {
     "src/pc/network/network.h": [ 'ServerSettings' ],
 }
-
-exclude_structs = [
-    "BassAudio"
-]
 
 sLuaManuallyDefinedStructs = [{
     'path': 'n/a',

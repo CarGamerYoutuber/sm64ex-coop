@@ -315,6 +315,8 @@ void smlua_init(void) {
 void smlua_update(void) {
     lua_State* L = gLuaState;
     if (L == NULL) { return; }
+
+    audio_sample_destroy_pending_copies();
     
     smlua_call_event_hooks(HOOK_UPDATE);
     // Collect our garbage after calling our hooks.
@@ -336,9 +338,7 @@ void smlua_shutdown(void) {
     hardcoded_reset_default_values();
     smlua_text_utils_reset_all();
     smlua_audio_utils_reset_all();
-#ifdef HAVE_BASS
     audio_custom_shutdown();
-#endif
     smlua_cobject_allowlist_shutdown();
     smlua_cpointer_allowlist_shutdown();
     smlua_clear_hooks();

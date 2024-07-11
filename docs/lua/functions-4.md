@@ -6999,13 +6999,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_sample_destroy(struct BassAudio* audio);`
+`void audio_sample_destroy(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7014,7 +7014,7 @@
 ## [audio_sample_load](#audio_sample_load)
 
 ### Lua Example
-`local BassAudioValue = audio_sample_load(filename)`
+`local ModAudioValue = audio_sample_load(filename)`
 
 ### Parameters
 | Field | Type |
@@ -7022,10 +7022,10 @@
 | filename | `string` |
 
 ### Returns
-[BassAudio](structs.md#BassAudio)
+[ModAudio](structs.md#ModAudio)
 
 ### C Prototype
-`struct BassAudio* audio_sample_load(const char* filename);`
+`struct ModAudio* audio_sample_load(const char* filename);`
 
 [:arrow_up_small:](#)
 
@@ -7039,7 +7039,7 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 | position | [Vec3f](structs.md#Vec3f) |
 | volume | `number` |
 
@@ -7047,7 +7047,7 @@
 - None
 
 ### C Prototype
-`void audio_sample_play(struct BassAudio* audio, Vec3f position, f32 volume);`
+`void audio_sample_play(struct ModAudio* audio, Vec3f position, f32 volume);`
 
 [:arrow_up_small:](#)
 
@@ -7061,13 +7061,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_sample_stop(struct BassAudio* audio);`
+`void audio_sample_stop(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7081,13 +7081,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_stream_destroy(struct BassAudio* audio);`
+`void audio_stream_destroy(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7101,13 +7101,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - `number`
 
 ### C Prototype
-`f32 audio_stream_get_frequency(struct BassAudio* audio);`
+`f32 audio_stream_get_frequency(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7121,13 +7121,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - `boolean`
 
 ### C Prototype
-`bool audio_stream_get_looping(struct BassAudio* audio);`
+`bool audio_stream_get_looping(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7141,33 +7141,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - `number`
 
 ### C Prototype
-`f32 audio_stream_get_position(struct BassAudio* audio);`
-
-[:arrow_up_small:](#)
-
-<br />
-
-## [audio_stream_get_tempo](#audio_stream_get_tempo)
-
-### Lua Example
-`local numberValue = audio_stream_get_tempo(audio)`
-
-### Parameters
-| Field | Type |
-| ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
-
-### Returns
-- `number`
-
-### C Prototype
-`f32 audio_stream_get_tempo(struct BassAudio* audio);`
+`f32 audio_stream_get_position(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7181,13 +7161,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - `number`
 
 ### C Prototype
-`f32 audio_stream_get_volume(struct BassAudio* audio);`
+`f32 audio_stream_get_volume(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7196,7 +7176,7 @@
 ## [audio_stream_load](#audio_stream_load)
 
 ### Lua Example
-`local BassAudioValue = audio_stream_load(filename)`
+`local ModAudioValue = audio_stream_load(filename)`
 
 ### Parameters
 | Field | Type |
@@ -7204,30 +7184,10 @@
 | filename | `string` |
 
 ### Returns
-[BassAudio](structs.md#BassAudio)
+[ModAudio](structs.md#ModAudio)
 
 ### C Prototype
-`struct BassAudio* audio_stream_load(const char* filename);`
-
-[:arrow_up_small:](#)
-
-<br />
-
-## [audio_stream_load_url](#audio_stream_load_url)
-
-### Lua Example
-`local BassAudioValue = audio_stream_load_url(url)`
-
-### Parameters
-| Field | Type |
-| ----- | ---- |
-| url | `string` |
-
-### Returns
-[BassAudio](structs.md#BassAudio)
-
-### C Prototype
-`struct BassAudio* audio_stream_load_url(const char* url);`
+`struct ModAudio* audio_stream_load(const char* filename);`
 
 [:arrow_up_small:](#)
 
@@ -7241,13 +7201,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_stream_pause(struct BassAudio* audio);`
+`void audio_stream_pause(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 
@@ -7261,7 +7221,7 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 | restart | `boolean` |
 | volume | `number` |
 
@@ -7269,7 +7229,7 @@
 - None
 
 ### C Prototype
-`void audio_stream_play(struct BassAudio* audio, bool restart, f32 volume);`
+`void audio_stream_play(struct ModAudio* audio, bool restart, f32 volume);`
 
 [:arrow_up_small:](#)
 
@@ -7283,14 +7243,14 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 | freq | `number` |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_stream_set_frequency(struct BassAudio* audio, f32 freq);`
+`void audio_stream_set_frequency(struct ModAudio* audio, f32 freq);`
 
 [:arrow_up_small:](#)
 
@@ -7304,14 +7264,14 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 | looping | `boolean` |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_stream_set_looping(struct BassAudio* audio, bool looping);`
+`void audio_stream_set_looping(struct ModAudio* audio, bool looping);`
 
 [:arrow_up_small:](#)
 
@@ -7325,58 +7285,14 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 | pos | `number` |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_stream_set_position(struct BassAudio* audio, f32 pos);`
-
-[:arrow_up_small:](#)
-
-<br />
-
-## [audio_stream_set_speed](#audio_stream_set_speed)
-
-### Lua Example
-`audio_stream_set_speed(audio, initial_freq, speed, pitch)`
-
-### Parameters
-| Field | Type |
-| ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
-| initial_freq | `number` |
-| speed | `number` |
-| pitch | `boolean` |
-
-### Returns
-- None
-
-### C Prototype
-`void audio_stream_set_speed(struct BassAudio* audio, f32 initial_freq, f32 speed, bool pitch);`
-
-[:arrow_up_small:](#)
-
-<br />
-
-## [audio_stream_set_tempo](#audio_stream_set_tempo)
-
-### Lua Example
-`audio_stream_set_tempo(audio, tempo)`
-
-### Parameters
-| Field | Type |
-| ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
-| tempo | `number` |
-
-### Returns
-- None
-
-### C Prototype
-`void audio_stream_set_tempo(struct BassAudio* audio, f32 tempo);`
+`void audio_stream_set_position(struct ModAudio* audio, f32 pos);`
 
 [:arrow_up_small:](#)
 
@@ -7390,14 +7306,14 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 | volume | `number` |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_stream_set_volume(struct BassAudio* audio, f32 volume);`
+`void audio_stream_set_volume(struct ModAudio* audio, f32 volume);`
 
 [:arrow_up_small:](#)
 
@@ -7411,13 +7327,13 @@
 ### Parameters
 | Field | Type |
 | ----- | ---- |
-| audio | [BassAudio](structs.md#BassAudio) |
+| audio | [ModAudio](structs.md#ModAudio) |
 
 ### Returns
 - None
 
 ### C Prototype
-`void audio_stream_stop(struct BassAudio* audio);`
+`void audio_stream_stop(struct ModAudio* audio);`
 
 [:arrow_up_small:](#)
 

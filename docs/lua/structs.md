@@ -5,7 +5,6 @@
 - [Animation](#Animation)
 - [AnimationTable](#AnimationTable)
 - [Area](#Area)
-- [BassAudio](#BassAudio)
 - [BehaviorDialogs](#BehaviorDialogs)
 - [BehaviorTrajectories](#BehaviorTrajectories)
 - [BehaviorValues](#BehaviorValues)
@@ -39,6 +38,8 @@
 - [MarioBodyState](#MarioBodyState)
 - [MarioState](#MarioState)
 - [Mod](#Mod)
+- [ModAudio](#ModAudio)
+- [ModAudioSampleCopies](#ModAudioSampleCopies)
 - [ModFile](#ModFile)
 - [ModeTransitionInfo](#ModeTransitionInfo)
 - [NetworkPlayer](#NetworkPlayer)
@@ -1210,18 +1211,6 @@
 
 <br />
 
-## [MarioAnimDmaRelatedThing](#MarioAnimDmaRelatedThing)
-
-| Field | Type | Access |
-| ----- | ---- | ------ |
-| anim | [OffsetSizePair](structs.md#OffsetSizePair) | read-only |
-| count | `integer` |  |
-| srcAddr | `Pointer` <`integer`> | read-only |
-
-[:arrow_up_small:](#)
-
-<br />
-
 ## [MarioAnimation](#MarioAnimation)
 
 | Field | Type | Access |
@@ -1366,6 +1355,31 @@
 | relativePath | `string` | read-only |
 | renderBehindHud | `boolean` | read-only |
 | selectable | `boolean` | read-only |
+
+[:arrow_up_small:](#)
+
+<br />
+
+## [ModAudio](#ModAudio)
+
+| Field | Type | Access |
+| ----- | ---- | ------ |
+| file | [ModFile](structs.md#ModFile) |  |
+| isStream | `boolean` |  |
+| loaded | `boolean` |  |
+| sampleCopiesTail | [ModAudioSampleCopies](structs.md#ModAudioSampleCopies) |  |
+
+[:arrow_up_small:](#)
+
+<br />
+
+## [ModAudioSampleCopies](#ModAudioSampleCopies)
+
+| Field | Type | Access |
+| ----- | ---- | ------ |
+| next | [ModAudioSampleCopies](structs.md#ModAudioSampleCopies) |  |
+| parent | [ModAudio](structs.md#ModAudio) |  |
+| prev | [ModAudioSampleCopies](structs.md#ModAudioSampleCopies) |  |
 
 [:arrow_up_small:](#)
 
@@ -2415,16 +2429,6 @@
 
 <br />
 
-## [SPTask](#SPTask)
-
-| Field | Type | Access |
-| ----- | ---- | ------ |
-| state | [enum SpTaskState](constants.md#enum-SpTaskState) |  |
-
-[:arrow_up_small:](#)
-
-<br />
-
 ## [ServerSettings](#ServerSettings)
 
 | Field | Type | Access |
@@ -2606,29 +2610,6 @@
 | posDist | `number` |  |
 | posPitch | `integer` |  |
 | posYaw | `integer` |  |
-
-[:arrow_up_small:](#)
-
-<br />
-
-## [UnusedArea28](#UnusedArea28)
-
-| Field | Type | Access |
-| ----- | ---- | ------ |
-| unk00 | `integer` |  |
-| unk02 | `integer` |  |
-| unk04 | `integer` |  |
-| unk06 | `integer` |  |
-| unk08 | `integer` |  |
-
-[:arrow_up_small:](#)
-
-<br />
-
-## [VblankHandler](#VblankHandler)
-
-| Field | Type | Access |
-| ----- | ---- | ------ |
 
 [:arrow_up_small:](#)
 

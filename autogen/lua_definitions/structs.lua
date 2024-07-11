@@ -900,11 +900,6 @@
 --- @field public pos Vec3f
 --- @field public yaw integer
 
---- @class MarioAnimDmaRelatedThing
---- @field public anim OffsetSizePair
---- @field public count integer
---- @field public srcAddr Pointer_integer
-
 --- @class MarioAnimation
 --- @field public currentAnimAddr Pointer_integer
 --- @field public targetAnim Animation
@@ -1025,6 +1020,17 @@
 --- @field public relativePath string
 --- @field public renderBehindHud boolean
 --- @field public selectable boolean
+
+--- @class ModAudio
+--- @field public file ModFile
+--- @field public isStream boolean
+--- @field public loaded boolean
+--- @field public sampleCopiesTail ModAudioSampleCopies
+
+--- @class ModAudioSampleCopies
+--- @field public next ModAudioSampleCopies
+--- @field public parent ModAudio
+--- @field public prev ModAudioSampleCopies
 
 --- @class ModFile
 --- @field public cachedPath string
@@ -1950,9 +1956,6 @@
 --- @field public hitPos Vec3f
 --- @field public surface Surface
 
---- @class SPTask
---- @field public state SpTaskState
-
 --- @class ServerSettings
 --- @field public bubbleDeath integer
 --- @field public enableCheats integer
@@ -2069,15 +2072,6 @@
 --- @field public posDist number
 --- @field public posPitch integer
 --- @field public posYaw integer
-
---- @class UnusedArea28
---- @field public unk00 integer
---- @field public unk02 integer
---- @field public unk04 integer
---- @field public unk06 integer
---- @field public unk08 integer
-
---- @class VblankHandler
 
 --- @class WallCollisionData
 --- @field public normalAddition Vec3f
