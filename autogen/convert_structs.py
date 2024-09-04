@@ -81,10 +81,12 @@ override_field_invisible = {
     "MarioState": [ "visibleToEnemies" ],
     "NetworkPlayer": [ "gag", "moderator"],
     "GraphNode": [ "_guard1", "_guard2" ],
+    "ModAudio": [ "sound", "decoder", "buffer", "bufferSize", "sampleCopiesTail" ],
 }
 
 override_field_deprecated = {
     "ServerSettings": [ "enableCheats" ],
+    "ModAudio": [ "isStream", "loaded" ],
 }
 
 override_field_immutable = {
