@@ -1,6 +1,6 @@
 # sm64ex-coop
 
-Unsanctioned WIP fork for Android and other open-source UNIX-like operating systems that are not supported by the normal `sm64ex-coop`, plus improved touchscreen controls. Online multiplayer mod for SM64 that synchronizes all entities and every level for multiple players. Fork of [sm64pc/sm64ex](https://github.com/sm64pc/sm64ex). Contains code copied from [AloXado320/sm64ex-alo](https://github.com/AloXado320/sm64ex-alo), [VDavid003/sm64-port-android](https://github.com/VDavid003/sm64-port-android), [VDavid003/sm64-port-android-base](https://github.com/VDavid003/sm64-port-android-base), and [porcino/sm64-port-android](https://github.com/porcino/sm64-port-android).
+Online multiplayer mod for SM64 that synchronizes all entities and every level for multiple players, targeting Android and other open-source UNIX-like operating systems, plus improved touchscreen controls. In addition to code from github parents of this fork, contains code copied from [AloXado320/sm64ex-alo](https://github.com/AloXado320/sm64ex-alo), [VDavid003/sm64-port-android](https://github.com/VDavid003/sm64-port-android), [VDavid003/sm64-port-android-base](https://github.com/VDavid003/sm64-port-android-base), and [porcino/sm64-port-android](https://github.com/porcino/sm64-port-android).
 
 Feel free to report bugs and contribute, but remember, there must be **no upload of any copyrighted asset**. 
 Run `./extract_assets.py --clean && make clean` or `make distclean` to remove ROM-originated content.
@@ -12,7 +12,6 @@ Run `./extract_assets.py --clean && make clean` or `make distclean` to remove RO
 > Android 14, which released on October 4, 2023, **partially breaks sm64ex-coop builder Termux v0.1.2**, but not entirely. My advice for using sm64ex-coop builder Termux v0.1.2 on Android 14 is to **type `apt-mark hold bash && yes | pkg upgrade -y` and press Enter, then wait for the command to complete, then touch "Exit (touch to reset)" in your notifications, then open sm64ex-coop builder Termux again**. This bug is a manifestation of **[upstream Termux bug #3647](https://github.com/termux/termux-app/issues/3647)** in sm64ex-coop builder Termux, and this workaround is my recommended implementation of [the solution for upstream](https://github.com/termux/termux-app/issues/3647#issuecomment-1765307488) backported to sm64ex-coop builder Termux v0.1.2. This behavior will eventually be fixed in a future release of sm64ex-coop builder Termux once I decide the current release is too broken to continue distributing sm64ex-coop for Android.
 
 * The easiest way is to download [sm64ex-coop builder Termux](https://github.com/robertkirkman/termux-app/releases/download/v0.1.2/termux-app_v0.1.2+apt-android-7-github-debug_universal.apk)
-* This fork of sm64ex-coop builder Termux that adds options for compiling other sm64ex forks also works! [SM64 Builder Termux](https://github.com/izzy2fancy/termux-app/releases)
 * If you already have Termux, you can try the auto builder without removing your current version of Termux by copying and pasting this command into it, then pushing enter:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/robertkirkman/termux-packages/master/packages/bash/bin-build-sm64ex-coop.sh)
@@ -20,7 +19,7 @@ bash <(curl -s https://raw.githubusercontent.com/robertkirkman/termux-packages/m
 
 [Click here to build the `.apk` from a non-Android device](https://github.com/robertkirkman/sm64ex-coop-android-base). 
 
-Recording showcasing new touch controls features:
+Recording showcasing touchscreen button features:
 
 [sm64ex-coop-android.webm](https://user-images.githubusercontent.com/31490854/213303280-b4a160a6-f711-4497-b9e1-d463546048e1.webm)
 
@@ -28,45 +27,47 @@ Recording showcasing several mods:
 
 [olaiabuttons.webm](https://user-images.githubusercontent.com/31490854/215781008-f83f9659-1ea2-4fbb-bf8d-43a0e0c6a1f6.webm)
 
-* [Render96 models and textures](https://github.com/Render96/Render96ex) ([SonicDark The Angel ✪🇨🇱#5827's colored version](https://sm64ex-coopmods.com/render96-characters/))
+* [Render96 models and textures](https://github.com/Render96/Render96ex) ([SonicDark The Angel ✪🇨🇱#5827's colored version](https://web.archive.org/web/20231228171913if_/https://sm64ex-coopmods.com/wp-content/uploads/2023/01/Render96_Chars.zip))
 
-* [Sharen's Details+ v1.0](https://sm64ex-coopmods.com/sharens-movement-tweaks/)
+* [Sharen's Mod](https://mods.sm64coopdx.com/mods/sharens-animation-overhaul.262/)
 
 * [JustOlaia's HD touchscreen button textures](https://github.com/JustOlaia/sm64ex-coop-apk/tree/coop/textures/touchcontrols)
 
 All custom icons by **xLuigiGamerx#6999**!
 
-What works:
+Working:
 
-✅ Direct connection - client and server ([VPN guide here](README_vpn.md))
+✅ Multiplayer (including cross play with other builds of sm64ex-coop version 36.1)
+
+✅ DynOS and Lua mods designed for sm64ex-coop version 36.1
 
 ✅ GPU acceleration
 
-✅ Normal audio
+✅ Audio
 
-✅ (most) DynOS and Lua mods
+✅ Touchscreen controls
 
-✅ Touch controls
-
-✅ Fullscreen
+✅ Fullscreen and more modes
 
 ✅ External gamepads
 
-What doesn't work:
+Not currently supported ([planned for a future update](https://github.com/robertkirkman/sm64ex-coop/issues/19)):
 
-❌ Some Lua mods on some devices
+❌ Version 37+ exclusive Lua mods
 
-❌ Crash when "skip intro cutscene" option is used on some devices
+❌ Cross play with version 37+
 
-❌ Occasional crash when loading HD texture packs - try restarting app
+Not planned:
+
+❌ Android force closes the app when loading HD texture packs or generating new `.lvl` files 
+- Try restarting app or [using process killer workarounds](https://github.com/agnostic-apollo/Android-Docs/blob/master/en/docs/apps/processes/phantom-cached-and-empty-processes.md#commands-to-disable-phantom-process-killing-and-tldr)
 
 ❌ Discord
-
-❌ BASS audio
+- This voip service's closed-source SDK is thought to be prohibitively difficult to use on alternative operating systems. Let me know if you would like [Mumla](https://f-droid.org/en/packages/se.lublin.mumla/) integration instead!
 
 ## How to Play on any open-source UNIX-like OS
 
-This repository also contains changes meant to make porting `sm64ex-coop` to open-source UNIX-like operating systems easier (the normal `sm64ex-coop` only supports GNU/Linux and MacOS at the exclusion of others). On many of them, setting up the dependencies (a C and C++ preprocessor and compiler, GNU Make, readline, binutils, libcurl, Python 3, SDL2, GLEW, an OpenGL or OpenGL ES graphics driver, and an SDL2-compatible display server) can take many steps that vary dramatically, so I've decided not to make a complete walkthrough for every single one like I have for Android. Once you have all of those configured just right, though, you'll be able to compile and play this way, and hopefully you'll only need to make minor adjustments to the `Makefile` to detect the dependencies the way your OS needs it to.
+This repository also contains changes meant to make porting sm64ex-coop to open-source UNIX-like operating systems easier (the normal sm64ex-coop only supports GNU/Linux and MacOS at the exclusion of others). On many of them, setting up the dependencies (a C and C++ preprocessor and compiler, GNU Make, readline, binutils, libcurl, Python 3, SDL2, GLEW, an OpenGL or OpenGL ES graphics driver, and an SDL2-compatible display server) can take many steps that vary dramatically, so I've decided not to make a complete walkthrough for every single one like I have for Android. Once you have all of those configured just right, though, you'll be able to compile and play this way, and hopefully you'll only need to make minor adjustments to the `Makefile` to detect the dependencies the way your OS needs it to.
 
 ```
 git clone --recursive https://github.com/robertkirkman/sm64ex-coop.git
@@ -84,7 +85,7 @@ To get you started, I've confirmed my fork to work on the following operating sy
 
 ✅ OpenBSD
 
-There are some bugs when running on them, but I've fixed just enough to get `sm64ex-coop` to compile, launch and host servers with mods in a playable state on them. On OpenBSD and FreeBSD, to build, I install `pkg-config` and temporarily symlink `make` to `gmake`, `gcc` to `clang`, `g++` to `clang++`, and `cpp` to `clang-cpp`. On postmarketOS, I use `clang` and install `bsd-compat-headers`. I strongly suspect that if your device has a non-`amd64` architecture and you find bugs, you'll probably want to look through my "`__ANDROID__`" `#ifdef`s in the code and check whether the code I've placed in them turns out to be architecture-related rather than Android-related.
+There are some bugs when running on them, but I've fixed just enough to get sm64ex-coop to compile, launch and host servers with mods in a playable state on them. On OpenBSD and FreeBSD, to build, I install `pkg-config` and temporarily symlink `make` to `gmake`, `gcc` to `clang`, `g++` to `clang++`, and `cpp` to `clang-cpp`. On postmarketOS, I use `clang` and install `bsd-compat-headers`. I strongly suspect that if your device has a non-`amd64` architecture and you find bugs, you'll probably want to look through my "`__ANDROID__`" `#ifdef`s in the code and check whether the code I've placed in them turns out to be architecture-related rather than Android-related.
 
 ## How to get this mode
 ![Screenshot_20231028-102901_Termux_X11](https://github.com/robertkirkman/sm64ex-coop/assets/31490854/166e8569-634e-454a-b271-a2d9dffae294)
@@ -101,23 +102,3 @@ virgl_test_server_android &
 termux-x11 :0 -xstartup "xfce4-session" &
 DISPLAY=:0 GALLIUM_DRIVER=virpipe build/us_pc/sm64.us.f3dex2e
 ```
-
-## How to Play on Windows
-
-[Instructions on how to play are available on the wiki.](https://github.com/djoslin0/sm64ex-coop/wiki/How-to-Play)
-
-- The easiest way is to download [coop-compiler](https://github.com/coop-compiler/coop-compiler/releases/latest/download/coop-compiler.exe)
-
-## Goal (accomplished)
-Create a mod for the PC port where multiple people can play together online.
-
-Unlike previous multiplayer projects, this one synchronizes enemies and events. This allows players interact with the same world at the same time.
-
-## Lua
-sm64ex-coop is moddable via Lua, similar to Roblox and Garry's Mod's Lua APIs. To get started, click [here](docs/lua/lua.md) to see the Lua documentation.
-
-## Contribution
-If you want to make a PR to sm64ex-coop, join the [Discord server](https://discord.gg/TJVKHS4) and communicate with us about your PR. We work on new sm64ex-coop releases on a private repo and push all of our changes to the main repo once we've added everything, so if you contact us we can give you access to that repo where you can PR your changes there.
-
-## Discord
-[https://discord.gg/TJVKHS4](https://discord.gg/TJVKHS4)
